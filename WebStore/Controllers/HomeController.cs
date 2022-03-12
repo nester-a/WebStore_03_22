@@ -6,7 +6,7 @@ namespace WebStore.Controllers
     {
         public IActionResult Index() //home/index
         {
-            return Content("Hello from first controller");
+            return View();
         }
 
         public IActionResult SecondAction(string id)
