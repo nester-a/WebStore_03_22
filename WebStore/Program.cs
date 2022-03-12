@@ -3,6 +3,6 @@ var app = builder.Build();
 
 var config = app.Configuration;
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => config["Greetings"]);
 
 app.Run();
