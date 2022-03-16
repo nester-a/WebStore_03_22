@@ -12,11 +12,12 @@ namespace WebStore.Controllers
             _employees = TestData.Employees;
         }
         public IActionResult Index() => View(_employees);
-        public IActionResult Details(int id) //home/details/id
+        public IActionResult Details(int id)
         {
-            var employee = _employees.FirstOrDefault(empl => empl.Id == id);
-            if(employee == null) return NotFound();
+            var employee = _employees.SingleOrDefault(empl => empl.Id == id);
+            if(employee is null) return NotFound();
             return View(employee);
         }
+
     }
 }
