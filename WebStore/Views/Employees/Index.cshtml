@@ -3,10 +3,11 @@
     ViewData["Title"] = "Список сотрудников";
 }
 
-<h3>Employees</h3>
+<div class="container">
+    <h3>Employees</h3>
 <hr/>
 
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>#</th>
@@ -33,6 +34,7 @@
 </table>
 
 <p>
-    <a href="/">Домой</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-default">Домой</a>
 </p>
+</div>
 
