@@ -3,10 +3,11 @@
     ViewData["Title"] = "Список сотрудников";
 }
 
-<h3>Employees</h3>
+<div class="container">
+    <h3>Employees</h3>
 <hr/>
 
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>#</th>
@@ -20,19 +21,23 @@
         @foreach(var employee in Model)
         {
             <tr>
-                <td>
-                    <a href="/home/details/@employee.Id">@employee.Id</a>
-                </td>
+                <td>@employee.Id</td>
                 <td>@employee.LastName</td>
                 <td>@employee.FirstName</td>
                 <td>@employee.Patronymic</td>
                 <td>@employee.Age</td>
+                <td>
+                    <a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">
+                        <i class="fa fa-info"/>
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
 <p>
-    <a href="/">Домой</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-default">Домой</a>
 </p>
+</div>
 
