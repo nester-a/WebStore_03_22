@@ -10,5 +10,6 @@ namespace WebStore.Controllers
         public IActionResult BlogSingle() => View();
         public IActionResult Cart() => View();
         public IActionResult Checkout() => View();
+        public IActionResult ContactUs() => View();
     }
 }

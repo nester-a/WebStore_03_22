@@ -14,5 +14,10 @@
       "library": "font-awesome@4.0.3",
       "destination": "wwwroot/lib/font-awesome/"
     }
-  ]
+  ,
+{
+  "library": "gmaps.js@0.4.25",
+  "destination": "wwwroot/lib/gmaps/"
+}
+]
 }
