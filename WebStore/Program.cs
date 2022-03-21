@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddMvc();
-builder.Services.AddControllersWithViews(opt => opt.Conventions.Add(new TestContollerConventions))
+builder.Services.AddControllersWithViews(opt => opt.Conventions.Add(new TestContollerConventions()))
     .AddRazorRuntimeCompilation();
 
 
