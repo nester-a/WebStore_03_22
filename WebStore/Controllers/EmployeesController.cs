@@ -1,26 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStore.Data;
 using WebStore.Models;
+using WebStore.Services.Interfaces;
 
 namespace WebStore.Controllers
 {
     [Route("staff")]
     public class EmployeesController : Controller
     {
-        private readonly IEnumerable<Employee> _employees;
+        private readonly IEmployeesData employeesData;
+        private readonly Logger<EmployeesController> logger;
 
-        public EmployeesController()
+        public EmployeesController(IEmployeesData employeesData, Logger<EmployeesController> logger)
         {
-            _employees = TestData.Employees;
+            this.employeesData = employeesData;
+            this.logger = logger;
         }
         [Route("all")]
-        public IActionResult Index() => View(_employees);
+        public IActionResult Index() => View(employeesData.GetAll());
 
 
         [Route("info/{id}")]
         public IActionResult Details(int id)
         {
-            var employee = _employees.SingleOrDefault(empl => empl.Id == id);
+            var employee = employeesData.GetById(id);
             if(employee is null) return NotFound();
             return View(employee);
         }
