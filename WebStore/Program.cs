@@ -21,7 +21,7 @@ var config = app.Configuration;
 
 app.UseStaticFiles();
 app.UseRouting();
-app.UseMiddleware<TestMiddleware>();
+//app.UseMiddleware<TestMiddleware>();
 app.MapGet("/greetings", () => config["Greetings"]);
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
