@@ -1,10 +1,12 @@
+using WebStore.Conventions;
 using WebStore.Infrastucture.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddMvc();
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews(opt => opt.Conventions.Add(new TestContollerConventions))
+    .AddRazorRuntimeCompilation();
 
 
 var app = builder.Build();
