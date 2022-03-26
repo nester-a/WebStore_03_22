@@ -17,5 +17,9 @@
                 return paragraphs[0];
             }
         }
+        public Blog()
+        {
+            Created = DateTime.Now;
+        }
     }
 }
