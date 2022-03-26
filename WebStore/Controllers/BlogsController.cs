@@ -15,7 +15,12 @@ namespace WebStore.Controllers
             this.logger = logger;
         }
         public IActionResult Index() => View(blogs.GetAll());
-        public IActionResult WebStoreBlog() => View();
+        public IActionResult WebStoreBlog(int id)
+        {
+            var blog = blogs.GetById(id);
+            if (blog is null) return NotFound();
+            return View(blog);
+        }
         public IActionResult Create() => View(new BlogViewModel());
         [HttpPost]
         public IActionResult Create(BlogViewModel model)

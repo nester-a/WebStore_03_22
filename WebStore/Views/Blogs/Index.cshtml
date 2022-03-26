@@ -19,7 +19,7 @@
 								<ul>
 									<li><i class="fa fa-user"></i>@blog.User</li>
 									<li><i class="fa fa-clock-o"></i>@blog.Created.Hour.ToString():@blog.Created.Minute.ToString()</li>
-									<li><i class="fa fa-calendar"></i> @blog.Created.Day/@blog.Created.Month/@blog.Created.Year</li>
+									<li><i class="fa fa-calendar"></i>@blog.Created.Day/@blog.Created.Month/@blog.Created.Year</li>
 								</ul>
 								<span>
 									@for(int i = 0; i < blog.StarsCount; i++)
@@ -32,7 +32,7 @@
 								<img src="~/images/blog/blog-@blog.ImgSource" alt="">
 							</a>
 							<p>@blog.FirstParagraph</p>
-							<a  class="btn btn-primary" asp-action="WebStoreBlog">Read More</a>
+							<a  class="btn btn-primary" asp-action="WebStoreBlog" asp-route-id="@blog.Id">Read More</a>
 						</div>
 						}
 						<div class="pagination-area">

@@ -1,4 +1,4 @@
-﻿
+﻿@model WebStore.Models.Blog
 	
 <section>
 	<div class="container">
@@ -10,26 +10,35 @@
 				<div class="col-sm-9">
 					<div class="blog-post-area">
 						<h2 class="title text-center">Latest From our Blog</h2>
+
+
 						<div class="single-blog-post">
-							<h3>Girls Pink T Shirt arrived in store</h3>
+							<h3>@Model.Title</h3>
 							<div class="post-meta">
 								<ul>
-									<li><i class="fa fa-user"></i> Mac Doe</li>
-									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+									<li><i class="fa fa-user"></i>@Model.User</li>
+									<li><i class="fa fa-clock-o"></i>@Model.Created.Hour.ToString():@Model.Created.Minute.ToString()</li>
+									<li><i class="fa fa-calendar"></i>@Model.Created.Day/@Model.Created.Month/@Model.Created.Year</li>
 								</ul>
 								<span>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-half-o"></i>
+									@for(int i = 0; i < Model.StarsCount; i++)
+									{
+										<i class="fa fa-star"></i>
+									}
 								</span>
 							</div>
 							<a href="">
-								<img src="~/images/blog/blog-one.jpg" alt="">
+								<img src="~/images/blog/blog-@Model.ImgSource" alt="">
 							</a>
-							<p>
+							@{
+								string[] ps = Model.Body.Split("\n");
+							}
+							@for(int i = 0; i < ps.Length; i++)
+							{
+								<p>@ps[i]</p> <br>
+							}
+
+							@*<p>
 								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> <br>
 
 							<p>
@@ -40,7 +49,7 @@
 
 							<p>
 								Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-							</p>
+							</p>*@
 							<div class="pager-area">
 								<ul class="pager pull-right">
 									<li><a href="#">Pre</a></li>
@@ -48,6 +57,8 @@
 								</ul>
 							</div>
 						</div>
+
+
 					</div><!--/blog-post-area-->
 
 					<div class="rating-area">
