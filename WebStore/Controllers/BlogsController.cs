@@ -14,7 +14,16 @@ namespace WebStore.Controllers
             this.blogs = blogs;
             this.logger = logger;
         }
-        public IActionResult Index() => View(blogs.GetAll());
+        public IActionResult Index()
+        {
+            var allBlogs = new List<BlogViewModel>();
+            foreach (var blog in blogs.GetAll())
+            {
+                allBlogs.Add(Сonvertirer.BlogToViewModel(blog));
+            }
+            return View(allBlogs);
+        }
+
         public IActionResult WebStoreBlog(int id)
         {
             var blog = blogs.GetById(id);

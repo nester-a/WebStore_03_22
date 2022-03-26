@@ -9,14 +9,6 @@
         public int StarsCount { get; set; }
         public string ImgSource { get; set; } = string.Empty;
         public string Body { get; set; } = string.Empty;
-        public string FirstParagraph
-        {
-            get
-            {
-                string[] paragraphs = Body.Split('\n');
-                return paragraphs[0];
-            }
-        }
         public Blog()
         {
             Created = DateTime.Now;

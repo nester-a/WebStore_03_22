@@ -12,8 +12,9 @@ namespace WebStore.ViewModels
                 Id = blog.Id,
                 Title = blog.Title,
                 User = blog.User,
-                CreateDay = blog.Created.Date.ToString(),
-                CreateTime = blog.Created.TimeOfDay.ToString(),
+                //CreateDay = blog.Created.Year.ToString() + "/" + blog.Created.Month.ToString() + "/" + blog.Created.Day.ToString(),
+                CreateDay = blog.Created.ToShortDateString(),
+                CreateTime = blog.Created.ToShortTimeString(),
                 StarsCount = blog.StarsCount,
                 ImgSource = blog.ImgSource,
                 Body = blog.Body.Split('\n'),
@@ -39,7 +40,7 @@ namespace WebStore.ViewModels
         }
         private static DateTime DateTimeConverter(string day, string time)
         {
-            string[] dayArray = day.Split('/');
+            string[] dayArray = day.Split('.');
             string[] timeArray = time.Split(':');
             int year = int.Parse(dayArray[0]);
             int month = int.Parse(dayArray[1]);

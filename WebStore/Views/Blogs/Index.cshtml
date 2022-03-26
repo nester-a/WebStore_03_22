@@ -1,5 +1,5 @@
 ﻿@*<partial name="Partial/_Slider"/>*@
-@model IEnumerable<WebStore.Models.Blog>
+@model IEnumerable<WebStore.ViewModels.BlogViewModel>
 	
 <section>
 	<div class="container">
@@ -18,8 +18,8 @@
 							<div class="post-meta">
 								<ul>
 									<li><i class="fa fa-user"></i>@blog.User</li>
-									<li><i class="fa fa-clock-o"></i>@blog.Created.Hour.ToString():@blog.Created.Minute.ToString()</li>
-									<li><i class="fa fa-calendar"></i>@blog.Created.Day/@blog.Created.Month/@blog.Created.Year</li>
+									<li><i class="fa fa-clock-o"></i>@blog.CreateTime</li>
+									<li><i class="fa fa-calendar"></i>@blog.CreateDay</li>
 								</ul>
 								<span>
 									@for(int i = 0; i < blog.StarsCount; i++)
@@ -31,7 +31,7 @@
 							<a href="">
 								<img src="~/images/blog/blog-@blog.ImgSource" alt="">
 							</a>
-							<p>@blog.FirstParagraph</p>
+							<p>@blog.Body[0]</p>
 							<a  class="btn btn-primary" asp-action="WebStoreBlog" asp-route-id="@blog.Id">Read More</a>
 						</div>
 						}
