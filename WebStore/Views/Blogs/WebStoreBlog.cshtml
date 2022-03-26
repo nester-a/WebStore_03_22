@@ -36,8 +36,10 @@
 							}
 							<div class="pager-area">
 								<ul class="pager pull-right">
-									<li><a href="#">Pre</a></li>
-									<li><a href="#">Next</a></li>
+									@if(Model.Id > 1){
+									<li><a asp-controller="Blogs" asp-action="WebStoreBlog" asp-route-id="@(Model.Id - 1)">Pre</a></li>
+									}
+									<li><a asp-controller="Blogs" asp-action="WebStoreBlog" asp-route-id="@(Model.Id + 1)">Next</a></li>
 								</ul>
 							</div>
 						</div>

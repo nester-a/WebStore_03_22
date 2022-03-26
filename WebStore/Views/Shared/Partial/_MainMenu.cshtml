@@ -1,23 +1,23 @@
 ﻿<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a asp-action="Index" class="active">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a asp-action="Shop">Products</a></li>
-										<li><a asp-action="ProductDetails">Product Details</a></li> 
-										<li><a asp-action="Checkout">Checkout</a></li> 
-										<li><a asp-controller="Home" asp-action="Cart">Cart</a></li> 
-										<li><a asp-action="Login">Login</a></li> 
-                                    </ul>
-                                </li> 
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a asp-controller="Blogs" asp-action="Index">Blog List</a></li>
-										<li><a asp-controller="Blogs" asp-action="WebStoreBlog">Add New Blog</a></li>
-                                    </ul>
-                                </li> 
-								<li><a asp-controller="Home" asp-action="Error404">404</a></li>
-								<li><a asp-action="ContactUs">Contact</a></li>
-								<li><a asp-controller="Employees" asp-action="Index">Employees</a></li>
-							</ul>
-						</div>
+	<ul class="nav navbar-nav collapse navbar-collapse">
+		<li><a asp-action="Index" class="active">Home</a></li>
+		<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+            <ul role="menu" class="sub-menu">
+                <li><a asp-action="Shop">Products</a></li>
+				<li><a asp-action="ProductDetails">Product Details</a></li> 
+				<li><a asp-action="Checkout">Checkout</a></li> 
+				<li><a asp-controller="Home" asp-action="Cart">Cart</a></li> 
+				<li><a asp-action="Login">Login</a></li> 
+            </ul>
+        </li> 
+		<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+            <ul role="menu" class="sub-menu">
+                <li><a asp-controller="Blogs" asp-action="Index">Blog List</a></li>
+				<li><a asp-controller="Blogs" asp-action="Create">Add New Blog</a></li>
+            </ul>
+        </li> 
+		<li><a asp-controller="Home" asp-action="Error404">404</a></li>
+		<li><a asp-action="ContactUs">Contact</a></li>
+		<li><a asp-controller="Employees" asp-action="Index">Employees</a></li>
+	</ul>
+</div>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebStore.Models;
 using WebStore.Services.Interfaces;
 using WebStore.ViewModels;
 
@@ -30,11 +31,23 @@ namespace WebStore.Controllers
             if (blog is null) return NotFound();
             return View(Сonvertirer.BlogToViewModel(blog));
         }
-        public IActionResult Create() => View(new BlogViewModel());
+
+        public IActionResult Create() => View(new Blog());
+
         [HttpPost]
-        public IActionResult Create(BlogViewModel model)
+        public IActionResult Create(Blog blog)
         {
-            return View(model);
+            var newBlog = new Blog
+            {
+                Id = blog.Id,
+                Title = blog.Title,
+                User = blog.User,
+                ImgSource = blog.ImgSource,
+                Body = blog.Body,
+            };
+
+            if (newBlog.Id == 0) blogs.Add(newBlog);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
