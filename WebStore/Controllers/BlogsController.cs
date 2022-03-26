@@ -28,7 +28,7 @@ namespace WebStore.Controllers
         {
             var blog = blogs.GetById(id);
             if (blog is null) return NotFound();
-            return View(blog);
+            return View(Сonvertirer.BlogToViewModel(blog));
         }
         public IActionResult Create() => View(new BlogViewModel());
         [HttpPost]

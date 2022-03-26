@@ -1,4 +1,4 @@
-﻿@model WebStore.Models.Blog
+﻿@model WebStore.ViewModels.BlogViewModel
 	
 <section>
 	<div class="container">
@@ -17,8 +17,8 @@
 							<div class="post-meta">
 								<ul>
 									<li><i class="fa fa-user"></i>@Model.User</li>
-									<li><i class="fa fa-clock-o"></i>@Model.Created.Hour.ToString():@Model.Created.Minute.ToString()</li>
-									<li><i class="fa fa-calendar"></i>@Model.Created.Day/@Model.Created.Month/@Model.Created.Year</li>
+									<li><i class="fa fa-clock-o"></i>@Model.CreateTime</li>
+									<li><i class="fa fa-calendar"></i>@Model.CreateDay</li>
 								</ul>
 								<span>
 									@for(int i = 0; i < Model.StarsCount; i++)
@@ -30,12 +30,9 @@
 							<a href="">
 								<img src="~/images/blog/blog-@Model.ImgSource" alt="">
 							</a>
-							@{
-								string[] ps = Model.Body.Split("\n");
-							}
-							@for(int i = 0; i < ps.Length; i++)
+							@foreach(var item in Model.Body)
 							{
-								<p>@ps[i]</p> <br>
+								<p>@item</p> <br>
 							}
 							<div class="pager-area">
 								<ul class="pager pull-right">
