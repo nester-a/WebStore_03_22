@@ -6,6 +6,7 @@ using WebStore.Services.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+builder.Services.AddSingleton<IBlogsData, InMemoryBlogsData>();
 //builder.Services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
 //builder.Services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
 
