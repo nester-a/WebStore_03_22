@@ -16,18 +16,27 @@ builder.Services.AddControllersWithViews(opt => opt.Conventions.Add(new TestCont
 
 
 var app = builder.Build();
-
+var env = app.Environment;
 
 var config = app.Configuration;
 
-app.UseStatusCodePages();
+#region Middleware
 
+if (env.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    //app.UseBrowserLink();
+}
+app.UseStatusCodePages();
 app.UseStaticFiles();
 app.UseRouting();
-//app.UseMiddleware<TestMiddleware>();
+app.UseStatusCodePagesWithReExecute("/Home/Status/{0}");
+
+
+# endregion
+
 app.MapGet("/greetings", () => config["Greetings"]);
 
-app.UseStatusCodePagesWithReExecute("/Home/Status/{0}");
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
