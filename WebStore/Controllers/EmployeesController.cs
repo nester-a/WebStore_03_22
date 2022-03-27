@@ -35,6 +35,7 @@ namespace WebStore.Controllers
         #region Edit
         public IActionResult Edit(int? id)
         {
+            
             if(id is null) return View(new EmployeeViewModel());
 
             var employee = employeesData.GetById((int)id);
@@ -54,19 +55,23 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel model)
         {
+            if (model.LastName == "Асама" && model.FirstName == "Бин" && model.Patronymic == "Ладан")
+                ModelState.AddModelError("", "Террористов не берём");
+            if (!ModelState.IsValid) return View(model);
             var employee = new Employee
             {
                 Id = model.Id,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Patronymic = model.Patronymic,
-                Age= model.Age,
+                Age = model.Age,
             };
 
             if (employee.Id == 0) employeesData.Add(employee);
             else employeesData.Update(employee);
 
             return RedirectToAction(nameof(Index));
+            
         }
         #endregion
 
