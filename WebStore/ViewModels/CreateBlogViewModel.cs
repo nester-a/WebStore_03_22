@@ -8,8 +8,8 @@ namespace WebStore.ViewModels
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Display(Name = "Заголовок")]
         [Required(ErrorMessage = "Заголовок не указан")]
+        [Display(Name = "Заголовок")]
         public string Title { get; set; } = string.Empty;
 
         [Display(Name = "Автор")]
@@ -17,7 +17,8 @@ namespace WebStore.ViewModels
         public string User { get; set; } = string.Empty;
 
         [Display(Name = "Картинка")]
-        public string ImgSource { get; set; } = string.Empty;
+        public string? ImgSource { get; set; }
+
 
         [Display(Name = "Текст")]
         public string Body { get; set; } = string.Empty;

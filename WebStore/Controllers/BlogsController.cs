@@ -48,6 +48,8 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult Create(CreateBlogViewModel model)
         {
+            if(!ModelState.IsValid) return View(model);
+
             var newModel = new CreateBlogViewModel
             {
                 Id = model.Id,
