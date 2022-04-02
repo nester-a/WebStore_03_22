@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using WebStore.Models;
 using WebStore.Services.Interfaces;
 using WebStore.ViewModels;
@@ -17,36 +18,52 @@ namespace WebStore.Controllers
         }
         public IActionResult Index()
         {
-            var allBlogs = new List<BlogViewModel>();
-            foreach (var blog in blogs.GetAll())
-            {
-                allBlogs.Add(Сonvertirer.BlogToViewModel(blog));
-            }
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Blog, BlogViewModel>()
+                .ForMember("CreateTime", opt => opt.MapFrom(ct => ct.Created.ToShortTimeString()))
+                .ForMember("CreateDay", opt => opt.MapFrom(cd => cd.Created.ToShortDateString()))
+                .ForMember("Body", opt => opt.MapFrom(bd => Сonvertirer.BlogBodyConverter(bd.Body))));
+            var mapper = new Mapper(config);
+            var allBlogs = mapper.Map<List<BlogViewModel>>(blogs.GetAll());
+
+            
             return View(allBlogs);
         }
 
         public IActionResult WebStoreBlog(int id)
         {
-            var blog = blogs.GetById(id);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Blog, BlogViewModel>()
+                .ForMember("CreateTime", opt => opt.MapFrom(ct => ct.Created.ToShortTimeString()))
+                .ForMember("CreateDay", opt => opt.MapFrom(cd => cd.Created.ToShortDateString()))
+                .ForMember("Body", opt => opt.MapFrom(bd => Сonvertirer.BlogBodyConverter(bd.Body))));
+            var mapper = new Mapper(config);
+
+            var blog = mapper.Map<BlogViewModel>(blogs.GetById(id));
+
             if (blog is null) return NotFound();
-            return View(Сonvertirer.BlogToViewModel(blog));
+            return View(blog);
         }
 
-        public IActionResult Create() => View(new Blog());
+        public IActionResult Create() => View(new CreateBlogViewModel());
 
         [HttpPost]
-        public IActionResult Create(Blog blog)
+        public IActionResult Create(CreateBlogViewModel model)
         {
-            var newBlog = new Blog
+            var newModel = new CreateBlogViewModel
             {
-                Id = blog.Id,
-                Title = blog.Title,
-                User = blog.User,
-                ImgSource = blog.ImgSource,
-                Body = blog.Body,
+                Id = model.Id,
+                Title = model.Title,
+                User = model.User,
+                ImgSource = model.ImgSource,
+                Body = model.Body,
             };
 
-            if (newBlog.Id == 0) blogs.Add(newBlog);
+            if (newModel.Id == 0) 
+            {
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<CreateBlogViewModel, Blog>());
+                var mapper = new Mapper(config);
+                var newBlog = mapper.Map<Blog>(newModel);
+                blogs.Add(newBlog);
+            }
             return RedirectToAction(nameof(Index));
         }
     }
