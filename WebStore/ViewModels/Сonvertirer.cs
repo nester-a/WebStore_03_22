@@ -12,7 +12,6 @@ namespace WebStore.ViewModels
                 Id = blog.Id,
                 Title = blog.Title,
                 User = blog.User,
-                //CreateDay = blog.Created.Year.ToString() + "/" + blog.Created.Month.ToString() + "/" + blog.Created.Day.ToString(),
                 CreateDay = blog.Created.ToShortDateString(),
                 CreateTime = blog.Created.ToShortTimeString(),
                 StarsCount = blog.StarsCount,
@@ -33,7 +32,7 @@ namespace WebStore.ViewModels
                 Created = DateTimeConverter(viewModel.CreateDay, viewModel.CreateTime),
                 StarsCount= viewModel.StarsCount,
                 ImgSource= viewModel.ImgSource,
-                Body = BodyConverter(viewModel.Body),
+                Body = BlogBodyConverter(viewModel.Body),
 
             };
             return blog;
@@ -50,7 +49,7 @@ namespace WebStore.ViewModels
             int sec = int.Parse(timeArray[2]);
             return new DateTime(year, month,thisDay, hour, min, sec);
         }
-        private static string BodyConverter(string[] array)
+        public static string BlogBodyConverter(string[] array)
         {
             StringBuilder sb = new StringBuilder();
             foreach (string item in array)
@@ -58,6 +57,11 @@ namespace WebStore.ViewModels
                 sb.Append(item);
             }
             return sb.ToString();
+        }
+
+        public static string[] BlogBodyConverter(string body)
+        {
+            return body.Split('\n');
         }
     }
 }

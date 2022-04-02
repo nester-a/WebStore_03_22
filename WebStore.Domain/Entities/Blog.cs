@@ -12,6 +12,7 @@
         public Blog()
         {
             Created = DateTime.Now;
+            StarsCount = 0;
         }
     }
 }
