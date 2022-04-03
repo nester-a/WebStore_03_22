@@ -25,10 +25,9 @@ if (env.IsDevelopment())
     app.UseDeveloperExceptionPage();
     //app.UseBrowserLink();
 }
-app.UseStatusCodePages();
+app.UseStatusCodePagesWithRedirects("~/home/status/{0}");
 app.UseStaticFiles();
 app.UseRouting();
-app.UseStatusCodePagesWithReExecute("/Home/Status/{0}");
 
 
 # endregion
