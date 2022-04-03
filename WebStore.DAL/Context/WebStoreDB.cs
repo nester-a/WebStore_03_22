@@ -5,6 +5,7 @@ namespace WebStore.DAL.Context
 {
     public class WebStoreDB : DbContext
     {
+        string cs = "Server=localhost;Database=master;Trusted_Connection=True;";
         public DbSet<Product> Products { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Brand> Brands { get; set; }
