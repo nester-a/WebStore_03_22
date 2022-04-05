@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebStore.Conventions;
 using WebStore.DAL.Context;
+using WebStore.Data;
 using WebStore.Services;
 using WebStore.Services.Interfaces;
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 builder.Services.AddDbContext<WebStoreDB>(opt => 
     opt.UseSqlServer(config.GetConnectionString("SqlServer")));
+builder.Services.AddTransient<WebStoreDbInitializer>();
 builder.Services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 builder.Services.AddSingleton<IBlogsData, InMemoryBlogsData>();
 builder.Services.AddSingleton<IProductData, InMemoryProductData>();
@@ -17,8 +19,13 @@ builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(opt => opt.Conventions.Add(new TestContollerConventions()))
     .AddRazorRuntimeCompilation();
 
-
 var app = builder.Build();
+
+using(var scope = app.Services.CreateScope())
+{
+    var initializer = scope.ServiceProvider.GetRequiredService<WebStoreDbInitializer>();
+    await initializer.InitializeAsync();
+}
 var env = app.Environment;
 
 
