@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using WebStore.Conventions;
 using WebStore.DAL.Context;
 using WebStore.Data;
-using WebStore.Services;
+using WebStore.Services.InMemory;
 using WebStore.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
