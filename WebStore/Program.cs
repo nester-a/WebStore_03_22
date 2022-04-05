@@ -3,6 +3,7 @@ using WebStore.Conventions;
 using WebStore.DAL.Context;
 using WebStore.Data;
 using WebStore.Services.InMemory;
+using WebStore.Services.InSQL;
 using WebStore.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,7 @@ builder.Services.AddDbContext<WebStoreDB>(opt =>
 builder.Services.AddTransient<WebStoreDbInitializer>();
 builder.Services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 builder.Services.AddSingleton<IBlogsData, InMemoryBlogsData>();
-builder.Services.AddSingleton<IProductData, InMemoryProductData>();
+builder.Services.AddScoped<IProductData, SqlProductData>();
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(opt => opt.Conventions.Add(new TestContollerConventions()))
