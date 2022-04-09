@@ -1,8 +1,9 @@
-﻿namespace WebStore.Models
+﻿using WebStore.Domain.Entities.Base;
+
+namespace WebStore.Models
 {
-    public class Blog
+    public class Blog : Entity
     {
-        public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public string User { get; set; } = string.Empty;
         public DateTime Created { get; set; }
