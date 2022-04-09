@@ -28,6 +28,13 @@ namespace WebStore.Data
                 await db.Database.MigrateAsync();
             }
 
+            logger.LogInformation("Инициализация БД информацией о сотрудниках...");
+            await InitializeEmployeesAsync();
+
+            logger.LogInformation("Инициализация БД информацией о блогах...");
+            await InitializeBlogsAsync();
+
+            logger.LogInformation("Инициализация БД информацией о товарах...");
             await InitializeProductsAsync();
             logger.LogInformation("Инициализация БД завершена");
         }
@@ -86,5 +93,52 @@ namespace WebStore.Data
             logger.LogInformation("Запись товаров выполнена");
         }
         
+        private async Task InitializeBlogsAsync()
+        {
+            if (db.Blogs.Any())
+            {
+                logger.LogInformation("Инициализация БД информацией о блогах не требуется");
+                return;
+            }
+
+            logger.LogInformation("Запись блогов...");
+            await using (await db.Database.BeginTransactionAsync())
+            {
+                db.Blogs.AddRange(TestData.Blogs);
+
+                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Blogs] ON");
+
+                await db.SaveChangesAsync();
+
+                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Blogs] OFF");
+
+                await db.Database.CommitTransactionAsync();
+            }
+            logger.LogInformation("Запись блогов выполнена");
+        }
+
+        private async Task InitializeEmployeesAsync()
+        {
+            if (db.Employees.Any())
+            {
+                logger.LogInformation("Инициализация БД информацией о сотрудниках не требуется");
+                return;
+            }
+
+            logger.LogInformation("Запись сотрудников...");
+            await using (await db.Database.BeginTransactionAsync())
+            {
+                db.Employees.AddRange(TestData.Employees);
+
+                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Employees] ON");
+
+                await db.SaveChangesAsync();
+
+                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Employees] OFF");
+
+                await db.Database.CommitTransactionAsync();
+            }
+            logger.LogInformation("Запись сотрудников выполнена");
+        }
     }
 }
