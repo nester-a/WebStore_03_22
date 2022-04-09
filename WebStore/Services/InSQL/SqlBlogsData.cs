@@ -27,18 +27,12 @@ namespace WebStore.Services.InSQL
 
             if (db.Blogs.Contains(blog)) return blog.Id;
 
-            blog.Id = db.Blogs.Max(b => blog.Id) + 1;
-
             logger.LogInformation("Запись блога в БД...");
             await using (await db.Database.BeginTransactionAsync())
             {
                 db.Blogs.Add(blog);
 
-                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Blogs] ON");
-
                 await db.SaveChangesAsync();
-
-                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Blogs] OFF");
 
                 await db.Database.CommitTransactionAsync();
             }

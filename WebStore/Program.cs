@@ -13,7 +13,7 @@ builder.Services.AddDbContext<WebStoreDB>(opt =>
     opt.UseSqlServer(config.GetConnectionString("SqlServer")));
 builder.Services.AddTransient<WebStoreDbInitializer>();
 builder.Services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-builder.Services.AddSingleton<IBlogsData, InMemoryBlogsData>();
+builder.Services.AddScoped<IBlogsData, SqlBlogsData>();
 builder.Services.AddScoped<IProductData, SqlProductData>();
 
 builder.Services.AddMvc();
